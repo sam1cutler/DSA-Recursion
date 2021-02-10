@@ -1,99 +1,50 @@
 console.log('Anagrams!');
-
-const testList = ['e','a','s','t'];
-
-for (let i=0 ; i<testList.length ; i++) {
-    console.log(testList[i]);
-    const starter = testList[i];
-    let newList = [];
-    for (let j=0 ; j<testList.length ; j++) {
-        if (i !== j) {
-            newList.push(testList[j])
-        }
-    }
-
-
-    console.log(`Start with ${starter}.`);
-    console.log(newList);
-}
-
-/*
-const testList = ['a','t'];
-const starterList = ['e','s'];
-
-const output = starterList.map(starter => {
-    return testList.map(item => {
-        return starter+item;
-    })
-})
-*/
-
- /*   
+   
 function anagrams(input) {
-    console.log(input);
 
     const characterList = input.split('');
-    console.log(characterList);
 
     let resultList = []
-
+    
+    // base case: list of a single character
     if (characterList.length === 1) {
         resultList.push(characterList[0]);
     } else {
-        for (let i=0; i<characterList.length ; i++) {
-            console.log(i);
-
+        // if list > 1 character, need to do same operation for
+        //   each character in list, treating it as "starter"
+        for (let i=0 ; i<characterList.length ; i++) {
+            // identify the "starter" character
             const starter = characterList[i];
-            console.log(starter);
 
-            //console.log(characterList.splice(i,1));
+            // create the "remainder" list = all but "starter" character
+            let newList = [];
+            for (let j=0 ; j<characterList.length ; j++) {
+                if (i !== j) {
+                    newList.push(characterList[j])
+                }
+            }
+
+            // func takes string as input, not list, so make string from list
+            const newInput = newList.join('');
+            
+            // *recursion*: feed input back into anagrams func,
+            //    which will return a list of some length
+            const nextStep = anagrams(newInput);
+
+            // whatever current state of resultsList, will concat
+            //    onto it the results of...
+            resultList = resultList.concat(
+                // ...iterating over items in anagrams func output list...
+                nextStep.map(item => {
+                    // ... for each list item, appending the "starter" character
+                    return starter+item
+                })
+            )
         }
     }
-
     return resultList;
-
-    
 }
 
 const output = anagrams('east');
 
 console.log(output);
-
-*/
-
-/*
-const anagrams = function(input) {
-    
-    // Initialize empty character list
-    let characterList = [];
-
-    // Identify characters of input
-    for (let i=0; i<input.length ; i++) {
-        characterList.push(input[i]);
-    }
-
-    console.log(characterList);
-
-    const output = characterList.map( subList => {
-        console.log(subList);
-        return subList;
-    })
-
-    console.log(output)
-
-    
-    // Base case
-    if (characterList.length === 1) {
-        return characterList[0];
-    } else {
-        for (let i=0; i<characterList.length ; i++) {
-            const reducedList = characterList.splice(i, 1);
-            return characterList[i] + anagrams(reducedList);
-        }
-    }
-    
-}
-
-anagrams('east');
-
-*/
