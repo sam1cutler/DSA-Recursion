@@ -8,4 +8,4 @@ const factorial = function(input) {
     }
 }
 
-console.log(factorial(3))
+console.log(factorial(12))
