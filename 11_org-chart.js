@@ -4,39 +4,38 @@ const testObject = {
     Zuck: {
         Schroep: {
             Bos: {
-                Steve: {},
-                Kyle: {},
-                Andra: {},
+                Steve: '',
+                Kyle: '',
+                Andra: '',
             },
             Zhao: {
-                Richie: {},
-                Sofia: {},
-                Jen: {}
+                Richie: '',
+                Sofia: '',
+                Jen: ''
             }
         },
         Schrage: {
             VanDyck: {
-                Sabrina: {},
-                Michelle: {},
-                Josh: {}
+                Sabrina: '',
+                Michelle: '',
+                Josh: ''
             },
             Swain: {
-                Blanch: {},
-                Tom: {},
-                Joe: {}
+                Blanch: '',
+                Tom: '',
+                Joe: ''
             }
         }
     }
 }
 
-//console.log(inputObject.Zuck.Schroep);
-
 const orgChart = function(inputObject) {
+
+    let resultList = [];
     
     // Base case: object with empty value
-
     for (const [key, value] of Object.entries(inputObject)) {
-        if (value === {}) {
+        if (value.length === 0) {
             return `/t${key}`
         } else {
             return `/t`+orgChart(value)
