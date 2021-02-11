@@ -31,18 +31,27 @@ const testObject = {
 
 const orgChart = function(inputObject) {
 
-    let resultList = [];
+    let result = '';
     
     // Base case: object with empty value
     for (const [key, value] of Object.entries(inputObject)) {
+        
+        console.log(`Key is ${key}.`)
+        console.log(result)
+
+        
         if (value.length === 0) {
-            return `/t${key}`
+            result += `\t${key}\n`
         } else {
-            return `/t`+orgChart(value)
+            console.log('Value is:')
+            console.log(value);
+            result += key+`\n\t`+orgChart(value);
         }
     }
 
+    return result;
 }
 
 const output = orgChart(testObject);
-console.log(output);
+console.log(`Total output is:`);
+console.log(output)
